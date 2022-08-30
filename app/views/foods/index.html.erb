@@ -1,0 +1,45 @@
+<div>
+  <% if @foods.empty? %>
+    <h3 class="text-center">There are no foods!</h3>
+    <div class="text-center mb-5">
+      <%= link_to "Add new food", new_food_path, class: 'btn btn-secondary' %>
+    </div>
+  <% else %>
+      <h4 class="text-center">My Foods</h4>
+        <div>
+          <% if current_user %>
+            <div class="text-center mb-5">
+              <%= link_to "Add new Food", new_food_path, class: 'btn btn-secondary' %>
+            </div>
+      <% end %>
+    </div>
+
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Food</th>
+              <th scope="col">Measurement Unit</th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Quanntity</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @foods.each do |food| %>
+              <tr>
+                <td><%= food.id %></td>
+                <td><%= food.name %></td>
+                <td><%= food.measurement_unit %></td>
+                <td><%= food.price %></td>
+                <td><%= food.quantity %></td>
+                <td><%= button_to "Remove", food_path(food.id), method: :delete %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>
