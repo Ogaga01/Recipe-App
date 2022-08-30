@@ -12,6 +12,8 @@ gem 'cancancan'
 
 gem 'devise'
 
+gem 'letter_opener'
+
 gem 'rails-controller-testing'
 
 gem 'ffi'
