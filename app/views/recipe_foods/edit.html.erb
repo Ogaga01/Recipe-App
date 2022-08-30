@@ -1,16 +1,22 @@
-<h1>Edit Ingredient</h1>
+<div class="recipe-food-edit">
+  <h3 class='m-3 recipe-food-new-h3'> Add food to Recipe</h3>
+  <%= form_with url: recipe_recipe_food_path, method: :patch, scope: :edit_recipe_food do |form| %>
+    <div class="form-div" > -
+    <div class="mb-3 col-sm-4">
+    <%= form.label :food, class:"form-label" %><br>
+    <%= form.select :food_id, current_user.foods.collect {|food| [food.name, food.id]},{ include_blank: true} , required: true, class:"form-select" %><br>
 
-<div>
-  <%= form_with model: @recipe_food, url: recipe_recipe_food_path(recipe_id: @recipe_food.recipe_id, id: @recipe_food.id), method: :put do |f| %>
-    <%= f.hidden_field :id, value: @recipe_food.id %>
-    <%= f.hidden_field :recipe_id, value: @recipe_food.recipe_id %>
-    <br>
-    <p>Select Ingredient</p>
-    <%= f.select :food_id, @foods.map { |food| [food.name, food.id] }, {}, { class:'form-select'} %>
+    </div>
 
-    <br>
-    <p>Quantity</p>
-    <%= f.number_field :quantity, { class:'form-select'} %>
-    <%= f.submit "Add Ingredient" %>
-  <% end %>
+    <div class="mb-3 col-sm-4">
+    <%= form.label :quantity, class:"form-label" %><br>
+    <%= form.number_field :quantity ,  class:"form-control" , required: true, placeholder: '1',  min: 1%><br>
+    </div>
+
+    <div class="recipe-food-edit-btns">
+    <%= form.submit "Update", class:"btn btn-primary form-control2" %>
+    <%=link_to 'Back', recipe_path(@recipe_id), class:"btn btn-primary form-control2"%>
+    </div>
+    </div>
+<%end%>
 </div>

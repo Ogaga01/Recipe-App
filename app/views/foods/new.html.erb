@@ -1,42 +1,21 @@
-<div class="row">
-  <div class="mb-3 col-md-8 offset-md-2">
-    <div class="row g-0">
-      <div class="col-md-12 background shadow">
-        <div class="card-body transbox">
-
-            <h4 class="card-title my-5 text-center">Add New Food</h4>
-
-          <%= form_with model: @food, url: foods_path do |form| %>
-            <div class="form-floating mb-3">
-            <%= form.hidden_field :user_id, value: current_user.id %>
-            </div>
-
-            <div class="form-floating mb-3">
-            <%= form.text_field :name, class: "form-control", required: true, placeholder: 'Name of Food' %>
-            </div>
-
-            <div class="form-floating mb-4">
-            <%= form.select :measurement_unit, [['grams', 'g'], ['kilograms', 'kg'], ['milligrams', 'ml'], ['liter', 'l'], ['ounces', 'oz'], ['pound', 'lb'], ['cup', 'cup'], ['pint', 'pint'], ['quart', 'quart'], ['gallon', 'gallon']], {:include_blank => "-", :required => true}, {:class => 'form-control'} %>
-            <%= form.label :measurement_unit, "measurement_unit" %>
-            <div>
-
-            <div class="form-floating mb-3">
-            <%= form.number_field :price, class: "form-control", required: true %>
-            <%= form.label :price, "Unit price($) *" %>
-            </div>
-
-            <div class="form-floating mb-3">
-            <%= form.number_field :quantity, class: "form-control", required: true %>
-            <%= form.label :quantity, "Quantity(0) *" %>
-            </div>
-
-
-            <div class="form-group mt-3">
-            <%= form.submit "Add Food", class: "btn", style: "background-color: var(--primary-color); color: var(--white);", data: {disable_with: "Loading..."} %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+<div class="foods-new-c">
+  <h3 class="foods-new-h3"> Add Food</h3>
+  <%= form_with url: foods_path, scope: :food do |form| %>
+    <div class="foods-new-div">
+    <%= form.label :Name, class:"form-label" %><br>
+    <%= form.text_field :name, class: 'form-control', require: true %>
     </div>
-  </div>
+
+    <div class="foods-new-div">
+    <%= form.label :Measurement_Unit, class:"form-label" %><br>
+    <%= form.text_field :measurement_unit, class: 'form-control', require: true %>
+    </div>
+
+    <div class="foods-new-div">
+    <%= form.label :Price, class:"form-label" %><br>
+    <%= form.number_field :price, class: 'form-control', require: true %>
+    </div>
+
+    <%= form.submit "Submit", class: "foods-new-btn" %>
+  <% end %>
 </div>
