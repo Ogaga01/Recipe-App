@@ -1,0 +1,16 @@
+<div class="row">
+<h2 class="text-center">Public Recipes</h2>
+<% @recipes.each do |recipe|%>
+<div class="">
+<div class="shadow-lg m-3 bg-white public-card">
+    <div class="card-body text-center overflow-hidden">
+      <%= link_to recipe_path(recipe.id), class: 'text-decoration-none' do %>
+        <h5 class="card-title py-3 text-center"><%= recipe.name %></h3>
+        <p class="card-text text-center"><%= truncate(recipe.description, length: 90, omission: '...') %></p>
+        <h3 class="btn", style= "background-color: var(--primary-color); color: var(--white)">View Recipe</h3>
+      <% end %>
+    </div>
+</div>
+</div>
+<% end %>
+</div>
