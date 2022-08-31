@@ -266,10 +266,12 @@ body {
 
 .recipe-show-prep-t {
   font-size: 20px;
+  color: #2276f4;
 }
 
 .recipe-show-publcT {
   font-size: 20px;
+  color: #2276f4;
 }
 
 .public-btn {
@@ -282,6 +284,7 @@ body {
 .show-steps {
   font-size: 20px;
   margin: 15px 45px;
+  color: #2276f4;
 }
 
 .shopping-list-btn {
@@ -375,7 +378,6 @@ body {
 .recipe-food-edit {
   display: flex;
   flex-direction: column;
-  margin: 50px 0 20px 600px;
 }
 
 .recipe-food-btns,
@@ -390,10 +392,19 @@ body {
 
 .recipe-food-new-h3 {
   color: #2276f4;
+  margin-left: 400px;
 }
 
 /* shopping-list styles */
 
 .shop-heads {
   color: #2276f4;
+}
+
+.form-label {
+  color: #2276f4;
+}
+
+.form-div {
+  margin-left: 450px;
 }
