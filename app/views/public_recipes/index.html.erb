@@ -1,16 +1,15 @@
-<div class="row">
-<h2 class="text-center">Public Recipes</h2>
-<% @recipes.each do |recipe|%>
-<div class="">
-<div class="shadow-lg m-3 bg-white public-card">
-    <div class="card-body text-center overflow-hidden">
-      <%= link_to recipe_path(recipe.id), class: 'text-decoration-none' do %>
-        <h5 class="card-title py-3 text-center"><%= recipe.name %></h3>
-        <p class="card-text text-center"><%= truncate(recipe.description, length: 90, omission: '...') %></p>
-        <h3 class="btn", style= "background-color: var(--primary-color); color: var(--white)">View Recipe</h3>
-      <% end %>
+<h2 class="public-recipe-h2"> Public Recipes </h2>
+<% @public_recipes.each_with_index do |public_recipe, index| %>
+  <%= link_to recipe_path(public_recipe[:id]), class: "each-public-recipe" do %> 
+    <div class="row border public-recipe-2c">
+      <div class="col-3">
+        <h3> <%= public_recipe[:name] %> </h3>
+        <p class="public-recipe-user"> By: <%= public_recipe[:user] %> </p>
+      </div>
+      <div class="col-offset-1 col-8 public-recipe-2c2">
+        <h6 class="public-recipe-items"> Total food items: <%= public_recipe[:food_items] %></h6>
+        <h6 class="public-recipe-price"> Total price: $<%= @total_price[index] %></h6>
+      </div>
     </div>
-</div>
-</div>
+  <% end %>
 <% end %>
-</div>

@@ -1,28 +1,28 @@
 <div>
+  <h1 class="text-center shop-heads">Shopping List</h1>
+  <div class="d-flex justify-content-between m-5">
+    <h3 class="shop-heads">Amount of food items to buy: <%= @food_amount %></h3>
+    <h3 class="shop-heads">Total value of food needed: $<%= @total_price %></h3>
+  </div>
 
-<h3 class="text-center"><%= current_user.name %>'s Shopping List</h3>
-
-<p class="text-center">Total Number of food items to buy: <span><strong><%= @recipe_foods.length %></strong></span>
-
-  Total value of food items needed:
- <span><strong>$<%= @recipe_foods.map {|ingredient| ingredient.food.price * ingredient.quantity }.sum %></strong></span>
-</p>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Price</th>
-    </tr>
-  </thead>
-    <tbody>
-    <% @recipe_foods.each do |ingredient|%>
+  <table class="table m-3">
+    <thead>
       <tr>
-          <td><%= ingredient.food.name %></td>
-          <td><%= ingredient.food.quantity %> <%= ingredient.food.measurement_unit %></td>
-          <td><%= ingredient.food.price %></td>
+        <th scope="col">Food</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @recipe_foods.each do |recipe_food| %>
+      <% recipe_food.each do |recipe_food2| %>
+      <tr>
+        <th scope="row"><%= recipe_food2.food.name %> </th>
+        <td><%= recipe_food2.quantity %><%= recipe_food2.food.measurement_unit %> </td>
+        <td>  $<%= recipe_food2.food.price*recipe_food2.quantity %></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% end %>
+      <%end %>
+   </tbody>
+  </table>
+</div>

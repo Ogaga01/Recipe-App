@@ -1,51 +1,44 @@
 class RecipeFoodsController < ApplicationController
-  def index
-    @recipe_foods = RecipeFood.all
-  end
-
   def new
     @recipe_food = RecipeFood.new
-    @foods = Food.all
-  end
-
-  def edit
-    @recipe_food = RecipeFood.find(params[:id])
-    @foods = Food.all
+    @recipe_id = params[:recipe_id]
   end
 
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params)
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe_food.recipe_id = @recipe.id
-
+    @recipe_food = @recipe.recipe_foods.create(recipe_food_params)
     if @recipe_food.save
-      redirect_to recipe_path(@recipe_food.recipe_id), notice: 'Ingredient has been added successfully!'
+      redirect_to recipe_path(params[:recipe_id]), flash: { alert: 'Your food is saved' }
     else
-      flash[:alert] = 'Failed creating ingredient'
-      redirect_back(fallback_location: root_path)
-    end
-  end
-
-  def update
-    recipe_food = RecipeFood.find(params[:id])
-
-    if recipe_food.update(recipe_food_params)
-      redirect_to recipe_path(recipe_food.recipe_id), notice: 'Ingredient has been edited successfully!'
-    else
-      redirect_to recipe_path(recipe_food.recipe_id), alert: 'An error occurred. Please try again.'
+      redirect_to new_recipe_recipe_food_path, flash: { alert: 'Could not save your food' }
     end
   end
 
   def destroy
     @recipe_food = RecipeFood.find(params[:id])
     @recipe_food.destroy!
-    redirect_to recipe_path(@recipe_food.recipe.id), notice: 'Recipe has been deleted successfully!'
+    flash[:notice] = 'You have deleted the recipe food!'
+    redirect_to recipe_path(params[:recipe_id])
+  end
+
+  def edit
+    @recipe_id = params[:recipe_id]
+  end
+
+  def update
+    @recipe_food = RecipeFood.find(params[:id])
+    @recipe_food.update(edit_recipe_food_params)
+    flash[:notice] = 'You have updated the recipe food successfully'
+    redirect_to recipe_path(params[:recipe_id])
   end
 
   private
 
-  # Only allow a list of trusted parameters through.
+  def edit_recipe_food_params
+    params.require(:edit_recipe_food).permit(:quantity, :food_id)
+  end
+
   def recipe_food_params
-    params.require(:recipe_food).permit(:recipe_id, :food_id, :quantity)
+    params.require(:recipe_food).permit(:quantity, :food_id)
   end
 end
